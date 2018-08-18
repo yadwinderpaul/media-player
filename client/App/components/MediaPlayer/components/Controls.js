@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withMediaProps } from 'react-media-player'
 import { Button, Icon } from 'semantic-ui-react'
+import { playNextMedia, playPreviousMedia } from '@/actions'
 
 class Controls extends Component {
   handlePlayPause () {
@@ -10,7 +11,13 @@ class Controls extends Component {
     }
   }
 
-  handleNextClick () {}
+  handlePreviousClick () {
+    this.props.playPreviousMedia()
+  }
+
+  handleNextClick () {
+    this.props.playNextMedia()
+  }
 
   handleFullScreenClick () {
     if (this.props.currentMedia) {
@@ -27,6 +34,13 @@ class Controls extends Component {
     return (
       <div>
         <Button.Group>
+          <Button
+            icon
+            {...extraProps}
+            onClick={this.handlePreviousClick.bind(this)}
+          >
+            <Icon name='left arrow' />
+          </Button>
           <Button
             icon
             {...extraProps}
@@ -63,6 +77,18 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    playNextMedia () {
+      dispatch(playNextMedia(...arguments))
+    },
+    playPreviousMedia () {
+      dispatch(playPreviousMedia(...arguments))
+    }
+  }
+}
+
 export default withMediaProps(connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Controls))

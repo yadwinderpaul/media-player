@@ -4,8 +4,8 @@ import { Card, List } from 'semantic-ui-react'
 import { setCurrentMedia } from '@/actions'
 
 class Queue extends Component {
-  handlePlayNowClick (media) {
-    this.props.setCurrentMedia(media)
+  handlePlayNowClick (queueItem) {
+    this.props.setCurrentMedia(queueItem)
   }
 
   render () {
@@ -16,22 +16,22 @@ class Queue extends Component {
           <List celled>
             {
               this.props.queue.length > 0
-                ? this.props.queue.map(media => {
+                ? this.props.queue.map(queueItem => {
                   let iconName = 'play'
                   if (this.props.currentMedia &&
-                    this.props.currentMedia.id === media.id) {
+                    this.props.currentMedia.id === queueItem.id) {
                     iconName = 'circle'
                   }
-                  return <List.Item key={media.id}>
+                  return <List.Item key={queueItem.id}>
                     <List.Icon
                       name={iconName}
                       size='large'
                       verticalAlign='middle'
-                      onClick={this.handlePlayNowClick.bind(this, media)}
+                      onClick={this.handlePlayNowClick.bind(this, queueItem)}
                     />
                     <List.Content>
-                      <List.Header>{media.title}</List.Header>
-                      {media.subTitle}
+                      <List.Header>{queueItem.id} {queueItem.title}</List.Header>
+                      {queueItem.subTitle}
                     </List.Content>
                   </List.Item>
                 })
