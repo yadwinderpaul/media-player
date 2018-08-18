@@ -3,6 +3,7 @@ import { Grid } from 'semantic-ui-react'
 import MediaPlayer from './components/MediaPlayer'
 import Queue from './components/Queue'
 import MediaList from './components/MediaList'
+import Ad from './components/Ad'
 import './index.scss'
 
 export default class App extends Component {
@@ -16,6 +17,7 @@ export default class App extends Component {
           <Grid.Row>
             <Grid.Column width={11}>
               <MediaPlayer />
+              <Ad />
               <Queue />
             </Grid.Column>
             <Grid.Column width={5}>
