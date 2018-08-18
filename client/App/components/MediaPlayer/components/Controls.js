@@ -6,7 +6,7 @@ import { playNextMedia, playPreviousMedia } from '@/actions'
 
 class Controls extends Component {
   handlePlayPause () {
-    if (this.props.currentMedia) {
+    if (this.props.currentItemId) {
       this.props.media.playPause()
     }
   }
@@ -20,14 +20,14 @@ class Controls extends Component {
   }
 
   handleFullScreenClick () {
-    if (this.props.currentMedia) {
+    if (this.props.currentItemId) {
       this.props.media.fullscreen()
     }
   }
 
   render () {
     let extraProps = {}
-    if (!this.props.currentMedia) {
+    if (!this.props.currentItemId) {
       extraProps.disabled = true
     }
 
@@ -73,7 +73,7 @@ class Controls extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentMedia: state.currentMedia
+    currentItemId: state.currentItemId
   }
 }
 

@@ -1,11 +1,21 @@
 export function playNewMedia (media) {
   return dispatch => {
+    const id = (new Date()).getTime()
+    const queueItem = {
+      ...media, id
+    }
+    dispatch(addItemToQueue(queueItem))
+    dispatch(setCurrentItemId(id))
+  }
+}
+
+export function addMediaToQueue (media) {
+  return dispatch => {
     const queueItem = {
       ...media,
       id: (new Date()).getTime()
     }
-    dispatch(setCurrentMedia(queueItem))
-    dispatch(addToQueue(queueItem))
+    dispatch(addItemToQueue(queueItem))
   }
 }
 
@@ -14,13 +24,12 @@ export function playNextMedia () {
     const state = getState()
     let currentIndex = -1
     state.queue.forEach((queueItem, index) => {
-      if (state.currentMedia &&
-        state.currentMedia.id === queueItem.id) {
+      if (state.currentItemId === queueItem.id) {
         currentIndex = index
       }
     })
     if (state.queue[currentIndex + 1]) {
-      dispatch(setCurrentMedia(state.queue[currentIndex + 1]))
+      dispatch(setCurrentItemId(state.queue[currentIndex + 1].id))
     }
   }
 }
@@ -30,31 +39,26 @@ export function playPreviousMedia () {
     const state = getState()
     let currentIndex = -1
     state.queue.forEach((queueItem, index) => {
-      if (state.currentMedia &&
-        state.currentMedia.id === queueItem.id) {
+      if (state.currentItemId === queueItem.id) {
         currentIndex = index
       }
     })
     if (state.queue[currentIndex - 1]) {
-      dispatch(setCurrentMedia(state.queue[currentIndex - 1]))
+      dispatch(setCurrentItemId(state.queue[currentIndex - 1].id))
     }
   }
 }
 
-export function setCurrentMedia (queueItem) {
+export function setCurrentItemId (id) {
   return {
-    type: 'SET_CURRENT',
-    queueItem
+    type: 'SET_CURRENT_ITEM_ID',
+    id
   }
 }
 
-export function addToQueue (media) {
-  const queueItem = {
-    ...media,
-    id: (new Date()).getTime()
-  }
+export function addItemToQueue (queueItem) {
   return {
-    type: 'ADD_TO_QUEUE',
+    type: 'ADD_ITEM_TO_QUEUE',
     queueItem
   }
 }

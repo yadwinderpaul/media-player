@@ -1,18 +1,18 @@
 const initialState = {
-  currentMedia: null,
   queue: [],
+  currentItemId: null,
   playlists: [],
   mediaList: getMediaList()
 }
 
 const store = (state = initialState, action) => {
   switch (action.type) {
-    case 'SET_CURRENT':
+    case 'SET_CURRENT_ITEM_ID':
       return {
         ...state,
-        currentMedia: action.queueItem
+        currentItemId: action.id
       }
-    case 'ADD_TO_QUEUE':
+    case 'ADD_ITEM_TO_QUEUE':
       let newQueue = state.queue.slice()
       newQueue.push(action.queueItem)
       return {

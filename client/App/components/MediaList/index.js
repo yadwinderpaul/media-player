@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Card, Image, Button } from 'semantic-ui-react'
-import { playNewMedia, addToQueue } from '@/actions'
+import { playNewMedia, addMediaToQueue } from '@/actions'
 const IMAGE = 'https://image.flaticon.com/icons/svg/148/148710.svg'
 
 class MediaList extends Component {
@@ -10,7 +10,7 @@ class MediaList extends Component {
   }
 
   handleAddToQueueClick (media) {
-    this.props.addToQueue(media)
+    this.props.addMediaToQueue(media)
   }
 
   render () {
@@ -63,8 +63,8 @@ const mapDispatchToProps = dispatch => {
     playNewMedia () {
       dispatch(playNewMedia(...arguments))
     },
-    addToQueue () {
-      dispatch(addToQueue(...arguments))
+    addMediaToQueue () {
+      dispatch(addMediaToQueue(...arguments))
     }
   }
 }

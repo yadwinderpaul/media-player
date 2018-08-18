@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Card, List } from 'semantic-ui-react'
-import { setCurrentMedia } from '@/actions'
+import { setCurrentItemId } from '@/actions'
 
 class Queue extends Component {
   handlePlayNowClick (queueItem) {
-    this.props.setCurrentMedia(queueItem)
+    this.props.setCurrentItemId(queueItem.id)
   }
 
   render () {
@@ -18,8 +18,7 @@ class Queue extends Component {
               this.props.queue.length > 0
                 ? this.props.queue.map(queueItem => {
                   let iconName = 'play'
-                  if (this.props.currentMedia &&
-                    this.props.currentMedia.id === queueItem.id) {
+                  if (this.props.currentItemId === queueItem.id) {
                     iconName = 'circle'
                   }
                   return <List.Item key={queueItem.id}>
@@ -30,7 +29,7 @@ class Queue extends Component {
                       onClick={this.handlePlayNowClick.bind(this, queueItem)}
                     />
                     <List.Content>
-                      <List.Header>{queueItem.id} {queueItem.title}</List.Header>
+                      <List.Header>{queueItem.title}</List.Header>
                       {queueItem.subTitle}
                     </List.Content>
                   </List.Item>
@@ -51,14 +50,14 @@ class Queue extends Component {
 const mapStateToProps = (state) => {
   return {
     queue: state.queue,
-    currentMedia: state.currentMedia
+    currentItemId: state.currentItemId
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    setCurrentMedia () {
-      dispatch(setCurrentMedia(...arguments))
+    setCurrentItemId () {
+      dispatch(setCurrentItemId(...arguments))
     }
   }
 }

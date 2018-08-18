@@ -5,29 +5,29 @@ import { Media, Player, controls } from 'react-media-player'
 import Controls from './components/Controls'
 import './index.scss'
 const { SeekBar, Volume } = controls
+const PLACEHOLDER = 'https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fi.stack.imgur.com%2FPtbGQ.png&f=1'
 
 class MediaPlayer extends Component {
   render () {
-    const currentMedia = this.props.currentMedia
-    const PLACEHOLDER = 'https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fi.stack.imgur.com%2FPtbGQ.png&f=1'
+    const currentQueueItem = this.props.currentQueueItem
 
     return (
       <Media>
         <Card fluid>
           <Card.Content>
             {
-              currentMedia && currentMedia.src
+              currentQueueItem && currentQueueItem.src
                 ? <div className="player">
-                  <Player src={currentMedia.src} autoPlay={true} />
+                  <Player src={currentQueueItem.src} autoPlay={true} />
                   <SeekBar clasName="seek-bar" />
                 </div>
                 : <Image src={PLACEHOLDER} />
             }
             <Card.Header>
-              {currentMedia ? currentMedia.title : ''}
+              {currentQueueItem ? currentQueueItem.title : ''}
             </Card.Header>
             <Card.Meta>
-              {currentMedia ? currentMedia.subTitle : ''}
+              {currentQueueItem ? currentQueueItem.subTitle : ''}
             </Card.Meta>
           </Card.Content>
           <Card.Content extra>
@@ -47,7 +47,9 @@ class MediaPlayer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentMedia: state.currentMedia
+    currentQueueItem: state.queue.find(queueItem => {
+      return queueItem.id === state.currentItemId
+    })
   }
 }
 
