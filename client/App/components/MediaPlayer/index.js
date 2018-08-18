@@ -1,23 +1,34 @@
 import React, { Component } from 'react'
-import { Card } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { Card, Image } from 'semantic-ui-react'
 import { Media, Player, controls } from 'react-media-player'
 import Controls from './components/Controls'
 import './index.scss'
 const { SeekBar, Volume } = controls
 
-export default class MediaPlayer extends Component {
+class MediaPlayer extends Component {
   render () {
-    const source = 'https://perform-content.airtel.tv//010718-EN-PERFORM-CROvDEN-5THINGS-RV-2_1530486931115_1726.mp4'
+    const currentMedia = this.props.currentMedia
+    const PLACEHOLDER = 'https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fi.stack.imgur.com%2FPtbGQ.png&f=1'
+
     return (
       <Media>
         <Card fluid>
           <Card.Content>
-            <div className="player">
-              <Player src={source} />
-              <SeekBar clasName="seek-bar" />
-            </div>
-            <Card.Header>Steve Sanders</Card.Header>
-            <Card.Meta>Friends of Elliot</Card.Meta>
+            {
+              currentMedia && currentMedia.src
+                ? <div className="player">
+                  <Player src={currentMedia.src} autoPlay={true} />
+                  <SeekBar clasName="seek-bar" />
+                </div>
+                : <Image src={PLACEHOLDER} />
+            }
+            <Card.Header>
+              {currentMedia ? currentMedia.title : ''}
+            </Card.Header>
+            <Card.Meta>
+              {currentMedia ? currentMedia.subTitle : ''}
+            </Card.Meta>
           </Card.Content>
           <Card.Content extra>
             <div className="controls-container">
@@ -33,3 +44,13 @@ export default class MediaPlayer extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    currentMedia: state.currentMedia
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(MediaPlayer)

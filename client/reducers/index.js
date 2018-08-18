@@ -6,35 +6,29 @@ const uris = [
   '/300518-EN-PERFORM-TERRY-PROFILE-N-2_1527710477291_288.mp4',
   '/060618-EN-PERFORM-COURTOIS-FUTURE-2_1528287989087_288.mp4'
 ]
+const mediaList = uris.map((uri, index) => {
+  return {
+    id: index,
+    type: 'video',
+    src: `${BASE_URL}${uri}`,
+    title: `Video ${index + 1}`,
+    subTitle: `Video ${index + 1} subtitle`
+  }
+})
 
 const initialState = {
   currentMedia: null,
-  isPlaying: false,
-  volumePercentage: 100,
   queue: [],
   playlists: [],
-  mediaList: uris.map(uri => {
-    return { type: 'video', url: `${BASE_URL}${uri}` }
-  })
+  mediaList
 }
 
 const store = (state = initialState, action) => {
   switch (action.type) {
-    case 'PLAY_CURRENT':
-      return {
-        ...state,
-        isPlaying: true
-      }
-    case 'PAUSE_CURRENT':
-      return {
-        ...state,
-        isPlaying: true
-      }
     case 'PLAY_NEW':
       return {
         ...state,
-        currentMedia: action.media,
-        isPlaying: true
+        currentMedia: action.media
       }
     default:
       return state

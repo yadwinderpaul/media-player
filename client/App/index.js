@@ -10,11 +10,11 @@ export default class App extends Component {
     return (
       <Grid celled='internally'>
         <Grid.Row>
-          <Grid.Column width={10}>
+          <Grid.Column width={11}>
             <MediaPlayer />
             <Queue />
           </Grid.Column>
-          <Grid.Column width={6}>
+          <Grid.Column width={5}>
             <MediaList />
           </Grid.Column>
         </Grid.Row>
