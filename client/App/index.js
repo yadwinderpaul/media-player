@@ -8,17 +8,22 @@ import './index.scss'
 export default class App extends Component {
   render () {
     return (
-      <Grid celled='internally'>
-        <Grid.Row>
-          <Grid.Column width={11}>
-            <MediaPlayer />
-            <Queue />
-          </Grid.Column>
-          <Grid.Column width={5}>
-            <MediaList />
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+      <div>
+        <div className="app-header">
+          Media Player
+        </div>
+        <Grid celled='internally'>
+          <Grid.Row>
+            <Grid.Column width={11}>
+              <MediaPlayer />
+              <Queue />
+            </Grid.Column>
+            <Grid.Column width={5}>
+              <MediaList />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </div>
     )
   }
 }

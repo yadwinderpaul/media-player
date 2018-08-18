@@ -4,3 +4,10 @@ export function playNewMedia (media) {
     media
   }
 }
+
+export function addToQueue (media) {
+  return {
+    type: 'ADD_TO_QUEUE',
+    media
+  }
+}

@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Card, Image, Button } from 'semantic-ui-react'
-import { playNewMedia } from '@/actions'
+import { playNewMedia, addToQueue } from '@/actions'
 const IMAGE = 'https://image.flaticon.com/icons/svg/148/148710.svg'
 
 class MediaList extends Component {
   handlePlayNowClick (media) {
     this.props.playNewMedia(media)
+  }
+
+  handleAddToQueueClick (media) {
+    this.props.addToQueue(media)
   }
 
   render () {
@@ -30,7 +34,12 @@ class MediaList extends Component {
                   >
                     Play Now
                   </Button>
-                  <Button basic color='red' size='mini'>
+                  <Button
+                    basic
+                    color='red'
+                    size='mini'
+                    onClick={this.handleAddToQueueClick.bind(this, media)}
+                  >
                     Add To Queue
                   </Button>
                 </Button.Group>
@@ -53,6 +62,9 @@ const mapDispatchToProps = dispatch => {
   return {
     playNewMedia () {
       dispatch(playNewMedia(...arguments))
+    },
+    addToQueue () {
+      dispatch(addToQueue(...arguments))
     }
   }
 }

@@ -1,11 +1,8 @@
-.app-wrap {
-  height: 100vh;
-  background-color: $bck-color;
-  display: flex;
-  flex-direction: column;
-}
-
-.app-content {
-  flex-grow: 1;
-  overflow-y: scroll;
+.app-header {
+  padding: 20px;
+  border-bottom: 2px solid black;
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
 }

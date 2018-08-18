@@ -30,6 +30,13 @@ const store = (state = initialState, action) => {
         ...state,
         currentMedia: action.media
       }
+    case 'ADD_TO_QUEUE':
+      let newQueue = state.queue.slice()
+      newQueue.push(action.media)
+      return {
+        ...state,
+        queue: newQueue
+      }
     default:
       return state
   }

@@ -11,12 +11,11 @@ class Controls extends Component {
     this.props.media.playPause()
   }
 
+  handleNextClick () {}
+
   render () {
     return (
       <Button.Group>
-        <Button icon>
-          <Icon name='left arrow' />
-        </Button>
         <Button
           icon
           labelPosition='left'
@@ -25,7 +24,10 @@ class Controls extends Component {
           <Icon name={this.props.media.isPlaying ? 'pause' : 'play'} />
           {this.props.media.isPlaying ? 'Pause' : 'Play'}
         </Button>
-        <Button icon>
+        <Button
+          icon
+          onClick={this.handleNextClick.bind(this)}
+        >
           <Icon name='right arrow' />
         </Button>
       </Button.Group>
