@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Grid } from 'semantic-ui-react'
-import Player from './components/Player'
-import Playlist from './components/Playlist'
+import MediaPlayer from './components/MediaPlayer'
+import Queue from './components/Queue'
 import MediaList from './components/MediaList'
 import './index.scss'
 
@@ -11,8 +11,8 @@ export default class App extends Component {
       <Grid celled='internally'>
         <Grid.Row>
           <Grid.Column width={10}>
-            <Player />
-            <Playlist />
+            <MediaPlayer />
+            <Queue />
           </Grid.Column>
           <Grid.Column width={6}>
             <MediaList />

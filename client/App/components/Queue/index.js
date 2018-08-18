@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
-export default class Player extends Component {
+export default class Queue extends Component {
   render () {
     return (
-      <div>Player</div>
+      <div>Queue</div>
     )
   }
 }
