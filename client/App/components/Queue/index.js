@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Card, List, Image } from 'semantic-ui-react'
-import { playNewMedia } from '@/actions'
+import { Card, List } from 'semantic-ui-react'
+import { setCurrentMedia } from '@/actions'
 
 class Queue extends Component {
   handlePlayNowClick (media) {
-    this.props.playNewMedia(media)
+    this.props.setCurrentMedia(media)
   }
 
   render () {
-    const IMAGE = 'https://image.flaticon.com/icons/svg/122/122626.svg'
-
     return (
       <Card fluid>
         <Card.Content header='Current Queue' />
@@ -18,11 +16,17 @@ class Queue extends Component {
           <List celled>
             {
               this.props.queue.length > 0
-                ? this.props.queue.map((media, index) => {
-                  return <List.Item key={index}>
-                    <Image
-                      avatar
-                      src={IMAGE}
+                ? this.props.queue.map(media => {
+                  let iconName = 'play'
+                  if (this.props.currentMedia &&
+                    this.props.currentMedia.id === media.id) {
+                    iconName = 'circle'
+                  }
+                  return <List.Item key={media.id}>
+                    <List.Icon
+                      name={iconName}
+                      size='large'
+                      verticalAlign='middle'
                       onClick={this.handlePlayNowClick.bind(this, media)}
                     />
                     <List.Content>
@@ -45,13 +49,16 @@ class Queue extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { queue: state.queue }
+  return {
+    queue: state.queue,
+    currentMedia: state.currentMedia
+  }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    playNewMedia () {
-      dispatch(playNewMedia(...arguments))
+    setCurrentMedia () {
+      dispatch(setCurrentMedia(...arguments))
     }
   }
 }

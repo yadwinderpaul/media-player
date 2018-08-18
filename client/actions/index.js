@@ -1,13 +1,24 @@
 export function playNewMedia (media) {
-  return {
-    type: 'PLAY_NEW',
-    media
+  return dispatch => {
+    const queueItem = {
+      ...media,
+      id: (new Date()).getTime()
+    }
+    dispatch(setCurrentMedia(queueItem))
+    dispatch(addToQueue(queueItem))
   }
 }
 
-export function addToQueue (media) {
+export function setCurrentMedia (queueItem) {
+  return {
+    type: 'SET_CURRENT',
+    queueItem
+  }
+}
+
+export function addToQueue (queueItem) {
   return {
     type: 'ADD_TO_QUEUE',
-    media
+    queueItem
   }
 }

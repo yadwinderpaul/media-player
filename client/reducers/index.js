@@ -7,14 +7,14 @@ const initialState = {
 
 const store = (state = initialState, action) => {
   switch (action.type) {
-    case 'PLAY_NEW':
+    case 'SET_CURRENT':
       return {
         ...state,
-        currentMedia: action.media
+        currentMedia: action.queueItem
       }
     case 'ADD_TO_QUEUE':
       let newQueue = state.queue.slice()
-      newQueue.push(action.media)
+      newQueue.push(action.queueItem)
       return {
         ...state,
         queue: newQueue
