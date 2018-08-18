@@ -1,0 +1,11 @@
+.app-wrap {
+  height: 100vh;
+  background-color: $bck-color;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-content {
+  flex-grow: 1;
+  overflow-y: scroll;
+}
